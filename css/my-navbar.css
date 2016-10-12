@@ -1,0 +1,30 @@
+  .nav .navbar-header{
+        border:none;
+        margin-bottom:0;      
+        margin:0px;
+        padding:0px;
+      }
+      .navbar{
+        border:none;
+        margin:0px;
+        padding:0px;
+        border-radius:0;
+      }
+
+      .logo{
+        margin-top:-10px;
+      }
+
+      ul.nav.navbar-nav{
+        margin-top:5px;
+      }
+
+.navbar-default{
+  background-color: #a1d7fc;
+   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #62abde), color-stop(100%, #a1d7fc));
+    background-image: -webkit-linear-gradient(top, #62abde, #a1d7fc);
+    background-image: -moz-linear-gradient(top, #62abde, #a1d7fc);
+    background-image: -ms-linear-gradient(top, #62abde, #a1d7fc);
+    background-image: -o-linear-gradient(top, #62abde, #a1d7fc);
+    background-image: linear-gradient(top, #62abde, #a1d7fc);
+}

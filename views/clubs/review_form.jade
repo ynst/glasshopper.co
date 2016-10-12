@@ -1,0 +1,175 @@
+extends ../base.jade
+
+block extraScripts
+  script.
+    //- ---- validation script -----
+    function validate_review() {
+        var form = document.forms["review-form"];
+        if (form["uni-name"].value == null || form["uni-name"].value == "" ||
+          form["club-name"].value == null || form["club-name"].value == '') {
+            alert("Please choose your university and club");
+            return false;
+        }
+
+        if(form["num_semesters"].value == 0){
+          alert("Please enter how long you involved with the club, or is there space-time singularity?");
+          return false;
+        }
+
+        if(form["rating_hours_per_week"].value == 0){
+          alert("Please enter how long you this club takes every week");
+          return false;
+        }
+        if(form['pros'].value.length + form['cons'].value.length < 100 || form['pros'].value.length + form['cons'].value.length > 4000){
+          $('#cons_group').after('Cons and pros should have at least 100 and at most 4,000 characters in total')
+          return false;
+        }
+
+        if(form['password'].value != )
+    }
+
+block content
+  style
+    include /css/star-rating.css
+  style
+    include /css/Pretty-Registration-Form.css
+  style
+    include /css/club-page.css
+  style
+    include /css/toggle-switch.css
+  style
+    include /css/dropdown-suggestions.css
+
+  script(src='/scripts/star-rating.js')
+  script(src='/scripts/submit-review.js')
+  script(src='/scripts/typeahead.bundle.js')
+  script(src='/scripts/typeahead-search-box.js')
+  script(src='/scripts/search_box.js')
+  //- form(name='addNoteForm', action='/review', method='POST')
+  //-   .form-group
+  //-     label(for='title') Title:
+  //-     input#title.form-control(type='text', name='title')
+  //-   .form-group
+  //-     label(for='description') Description:
+  //-     textarea#description.form-control(rows='5', name='description')
+  //-   button.btn.btn-default(type='submit') Submit
+  if user.demographic_type != 0
+    .row.register-form
+      .col-md-8.col-md-offset-2
+        form#review-form.form-horizontal.custom-form(name="review-form" method="POST" , action="/review")
+          //- onsubmit="return validate_review()")
+          h1 #{action_header}
+          if !club || !university 
+            h3 Search your university and club
+          .form-group
+            .col-sm-4.label-column
+                label.control-label(for='uni-name') University 
+            if university
+              .col-sm-6.input-column
+                input#uni-input.form-control(type='search' placeholder="#{university}.name" name='uni-name' readonly)
+            else
+              .col-sm-6.input-column
+                div#prefetch-universities
+                  input#uni-input-typeahead.typeahead(type='search' name="uni-name" placeholder="Universities")
+          .form-group
+            .col-sm-4.label-column
+                label.control-label(for='club-name') Club 
+            if club && university 
+              .col-sm-6.input-column
+                input#club-input.form-control(type='search' placeholder="#{club}.name" name="club-name" readonly)
+            else
+              .col-sm-6.input-column
+                div#prefetch-clubs
+                  input#club-input-typeahead.typeahead(type='search' name="club-name" placeholder="Clubs")
+
+          #disable_part_1
+            .form-group
+              .col-sm-4.label-column
+                label.control-label I am a...
+              .col-sm-4
+                .radio
+                  label
+                    input.membership_status(type='radio', name='is_current_member' value="0" id="former_radio_button")
+                    | Former Member
+                .radio
+                  label
+                    input.membership_status(type='radio', name='is_current_member' value="1" id="current_radio_button" checked=(review2edit) ? "#{review2edit.is_current_member}": "1")
+                    | Current Member
+            .form-group#duration_group
+              .col-sm-4.label-column
+                label#duration_para.control-label I've involved with the organization for...
+              .col-sm-4.input-column
+                input.number_input(type='number' name="num_semesters" id="num_semesters" min="0" max="40" value=(review2edit) ? "#{review2edit.num_semesters}": "0")
+                select.selectpicker(data-style='btn-info', name='semester_type_id' id='semester_type_id' type="number" checked=(review2edit) ? "#{review2edit.semester_type_id}": "2")
+                   option(name='table2', value='2') Semester(s)
+                   option(name='table3', value='3') Trimester(s)
+                   option(name='table4', value='4') Quarter(s) 
+                   option(name='table4', value='4') Months(s) 
+          //-h3 Ratings
+          .form-group
+              .col-sm-4.label-column
+                  label.control-label(for='rating_day_to_day') Culture
+              .col-sm-4.label-column
+                input#rating_day_to_day.rating(type='number', data-size='sm', name='rating_day_to_day' 
+                showClear="false" value=(review2edit) ? "#{review2edit.rating_day_to_day}": "0" required)
+          .form-group
+              .col-sm-4.label-column
+                  label.control-label(for='rating_legitimacy') Opportunities for advancement
+              .col-sm-4.label-column
+                input#rating_legitimacy.rating(type='number', data-size='sm', name='rating_legitimacy' showClear="false"  value=(review2edit) ? "#{review2edit.rating_legitimacy}": "0" required)
+          .form-group
+              .col-sm-4.label-column
+                  label.control-label(for='rating_future_value') Skill development
+              .col-sm-4.label-column
+                input#rating_future_value.rating(type='number', data-size='sm', name='rating_future_value' showClear="false" value=(review2edit) ? "#{review2edit.rating_future_value}": "0" required)
+          .form-group
+              .col-sm-4.label-column
+                  label.control-label(for='rating_people') Quality of people
+              .col-sm-4.label-column
+                input#rating_people.rating(type='number', data-size='sm', name='rating_people' showClear="false"  value=(review2edit) ? "#{review2edit.rating_people}": "0" required)
+          .form-group
+            .col-sm-4.label-column
+              label.control-label Number of hours per week
+            .col-sm-4.input-column
+              input.number_input(type='number' name="rating_hours_per_week" id="rating_hours_per_week" min="0" max="100" value=(review2edit) ? "#{review2edit.rating_hours_per_week}": "0" required)
+          #test3
+            .form-group
+              .col-sm-4.label-column
+                label.control-label(for='position') Position 
+              .col-sm-4.input-column
+                select.selectpicker(data-style='btn-info', name='position' type="number" value=(review2edit) ? "#{review2edit.position_id}": "0")
+                   option(name='table1', value='1') Head
+                   option(name='table2', value='2') Board Member
+                   option(name='table3', value='3') Member
+                   option(name='table4', value='4') Volunteer
+                   option(name='table5', value='0') Other 
+            .form-group
+              .col-sm-4.label-column
+                  label.control-label(for='pros') Pros
+              .col-sm-6.input-column
+                  textarea#pros.form-control(rows='4', cols='50', name='pros'  placeholder="Pros" value=(review2edit) ? "#{review2edit.pros}": "")
+            .form-group#cons_group
+              .col-sm-4.label-column
+                  label.control-label(for='cons') Cons 
+              .col-sm-6.input-column
+                  textarea#cons.form-control(rows='4', cols='50', name='cons'  placeholder="Cons" value=(review2edit) ? "#{review2edit.cons}": "")
+            .form-group
+              .checkbox
+                input(type='checkbox' name="overall_recommend" id="overall_recommend" checked=(review2edit) ? "#{review2edit.overall_recommend}": "1")
+                label(for="overall_recommend" id="overall_recommend_label") Overall, I would recommend <br> this organization
+            .form-group
+              .checkbox
+                input(type='checkbox' name="approve_leadership" id="approve_leadership" checked=(review2edit) ? "#{review2edit.approve_leadership}": "1")
+                label(for="approve_leadership" id="approve_leadership_label") Overall, I approve of the leadership <br>  of this organization
+            .checkbox
+              label
+                input.checkbox_rating(type='checkbox' name="is_anon" id='is_anon' checked="1")
+                | Make my review anonymous
+            
+            button#submitbtn.btn.btn-default.submit-button(type='submit' form="review-form" onclick="return validate_review()") Submit my review
+  else
+    .row.register-form
+      .col-md-8.col-md-offset-2
+        h1 Sorry, you are not a university student. You can't submit reviews
+
+

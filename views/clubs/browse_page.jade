@@ -1,0 +1,56 @@
+extends ../base.jade
+
+block content
+  style
+    include ../../css/search_container.css
+  style
+    include ../../css/search-bar.css
+  style
+    include /css/dropdown-suggestions.css
+  style
+    include /css/browse_page.css
+  script(src='/scripts/typeahead.bundle.js')
+  script(src='/scripts/typeahead-search-box.js')
+  script(src='/scripts/browse_page.js')
+  script(src='https://rawgit.com/janl/mustache.js/master/mustache.js')
+  //- script
+  //-     document.getElementById("uni-search-box").onclick = function(){myFunction()};
+  //-     function myFunction() {
+  //-     document.getElementById("club-search-box").disabled ="false" ;
+  //-     }
+  script.
+    $(document).ready(function(){
+    $("[data-toggle=popover]").popover({
+        html: true, 
+        content: function() {
+              return "Loading"
+            }
+    });;});
+
+  #page_wrapper
+    h3.centered Start by typing your university
+    #search_container
+      .row
+        .col-sm-1
+        .col-sm-3
+          div#prefetch-universities
+            input#uni-input-typeahead.typeahead(type='search' placeholder="University" value=(university) ? "#{university}":"Yale University")
+        .col-sm-3
+          input#club_input(type='search' placeholder="Keyword, title...")
+        .col-sm-2
+          select.selectpicker(data-style='btn-info', name='club_type_id' id="club_type_id" type="number")
+            option(value="-1")
+            each club_type in club_types
+                  option(name='table', value='#{club_type.ID}') #{club_type.name}
+        //- .col-sm-2
+        //-   select.selectpicker(data-style='btn-info', name='rank_by' id="rank_by" type="number")
+        //-     option(value="-1")
+        //-     each item, index in ["Glasshopper score (coming soon)", "Name", "Star ratings", "Approval of leadership", "Recommended by members"]
+        //-       option(name='table', value='#{index}') #{item}
+        .col-sm-1
+          .checkbox
+            label
+              input(type='checkbox' name="is_recruiting" id="is_recruiting")
+              | Recruiting
+    p.loading_p Loading
+    #results_container

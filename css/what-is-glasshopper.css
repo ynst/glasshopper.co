@@ -1,0 +1,86 @@
+
+
+
+
+div.gradient{
+    padding:30px;
+	background-color:#a8e0b9; 
+}
+
+
+div.img-container{
+    width:100%;
+    max-width:600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (min-width:767px){
+    img.pie_chart.cropped {
+        max-width:100%;
+        height:auto;
+    }
+}
+@media (max-width:767px){
+    img.pie_chart.cropped {
+        max-width:100%;
+        height:auto;
+    }
+}
+img.pie_chart.cropped{
+    margin-bottom:20px;
+}
+a.gh_button_pink_bg{
+    max-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 40px;
+}
+div.stripe{
+    margin:0;
+}
+div.stripe.top{
+    background-image: url("/images/hero.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: right; /* left to display the image on mobile*/
+}
+.full-height{
+    height: 100%;
+}
+.transparent{
+    background:rgba(255, 255, 255, 0.5);
+    height:100%;
+    padding:20px;
+}
+.flex-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom:10px;
+}
+.single-header-wrapper{
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding:20px;
+}
+@media (min-width:767px) {
+    h1.top{
+        font-size: 60px;
+    }
+}
+@media (max-width:767px) {
+    h1.top{
+        font-size: 40px;
+    }
+}
+
+footer.my-footer{
+    margin-top:0;
+}
+
+
+

@@ -1,0 +1,20 @@
+.main_search_container_wrapper 
+  .row
+    if university
+      .col-md-12.input-column
+        input#uni-input.form-control(type='search' placeholder="#{university}.name")
+    else
+      .col-md-12.input-column
+        div#prefetch-universities
+          input#uni-input-typeahead.typeahead(type='search' placeholder="Start by typing your university" )
+  a#nav_button_main_page.gh_button_pink_bg(href="/browse") 
+  .row
+    label.control-label#club_search_label or find your club now
+    if club && university 
+      .col-md-12.input-column
+        input#club-input.form-control(type='search' placeholder="#{club}.name" readonly)
+    else
+      .col-md-12.input-column
+        div#prefetch-clubs
+          input#club-input-typeahead.typeahead(type='search' placeholder="Which club do you want to search?")
+  a#club_nav_button_main_page.gh_button_pink_bg(href="/browse") 

@@ -1,0 +1,153 @@
+extends ../base.jade
+
+block content
+  style
+    include ../../css/club-page.css
+  style
+    include ../../css/star-rating.css
+  //- style
+  //-   include ../../css/jquery.circliful.css
+
+  script(src='/scripts/club-page.js')
+  script(src='/scripts/star-rating.js')
+  //- script(src='/scripts/jquery.circliful.min.js')
+
+  - var placeholder_logo = "/images/club_placeholder.png"
+  .flex-container-my
+    .content
+      .container-fluid
+        if user.demographic_type != 0
+          div.row
+            .col-md-3
+              .white-bg-container
+                h3 #{user.name} from #{user.university_name}
+              //- .white-bg-container
+              //-   p facebook buttons TODO
+              .white-bg-container
+                h3 Following
+                  //- show all TODO 
+                .container-fluid
+                  if clubs_following && clubs_following.length > 0 
+                    each club in clubs_following
+                      .col-md-6
+                        div.img-container.suggested_club_logo
+                          - var club_link = "/" + club.university_url + "/" + club.glasshopper_url
+                          - var uni_link = "/" + club.university_url
+                          a(href="#{club_link}")
+                            - var image_source = club.logo_url || placeholder_logo
+                            img.cropped(src="#{image_source}")
+                        a(href="#{club_link}")
+                          h5.centered #{club.name}
+                        a(href="#{uni_link}")
+                          h6.centered #{club.college_name}
+                  else
+                    h4 You're not following any clubs now
+            .col-md-8
+              .white-bg-container.suggested-clubs
+                h3 Suggested clubs for you
+                //- you're a verified member in these clubs TODO
+                if suggested_clubs 
+                  - var n = 4 //- number of similar pages displayed
+                  .row
+                    each suggested_club in suggested_clubs
+                      if n > 0
+                        - var club_link = "/" + suggested_club.university_url + "/" + suggested_club.glasshopper_url
+                        - var uni_link = "/" + suggested_club.university_url
+                        - n = n -1
+                        .col-md-3
+                          div.img-container.suggested_club_logo
+                            a(href="#{club_link}")
+                              - var image_source = suggested_club.logo_url || placeholder_logo
+                              img.cropped(src="#{image_source}")
+                          a(href="#{club_link}")
+                            h5.centered #{suggested_club.name}
+                          a(href="#{uni_link}")
+                            h6.centered #{suggested_club.college_name}
+                else 
+                    h4 Sorry, we don't have any clubs to suggest yet. Please follow clubs to get more suggestions
+              .white-bg-container
+                h3 Your reviews
+                if reviews_by_user && reviews_by_user.length >0
+                  each review in reviews_by_user
+
+                    .media
+                      h5 Your review about #{review.club_name}
+                      //-+reviewer(num_semesters, semester_type)
+                      .col-md-6
+                        p.pros Pros: 
+                        p.prosreview #{review.pros}
+                        p.cons Cons: 
+                        p.consreview #{review.cons}
+
+
+                      .col-md-6
+                        #ratings_wrapper
+                          table
+                            tbody
+                              tr 
+                                th Hours per week
+                                td #{review.rating_hours_per_week}
+                              tr
+                                    th Culture
+                                    td 
+                                      input.rating(type='number', id="rating_day_to_day" data-size='xs', name='rating_day_to_day' showClear="false" value="#{review.rating_day_to_day}" readonly)
+
+                              tr
+                                    th Opportunities for Advancement
+                                    td 
+                                      input.rating(type='number', id="rating_future_value" data-size='xs', name='rating_future_value' showClear="false" value="#{review.rating_future_value}" readonly)
+                              tr
+                              tr
+                                    th Skill Development
+                                    td 
+                                      input.rating(type='number', id="rating_legitimacy" data-size='xs', name='rating_legitimacy' showClear="false" value="#{review.rating_legitimacy}" readonly)
+                              tr
+                                    th Quality of People
+                                    td 
+                                      input.rating(type='number', id="rating_people" data-size='xs', name='rating_people' showClear="false" value="#{review.rating_people}" readonly)
+                              
+                        if review.rating_recommend
+                          p 
+                            .span(style='color:#42c46a') Overall recommends
+                        else
+                          p 
+                          .span(style='color:#db412d') Overall does not recommend
+                                
+                        if (review.rating_leadership)
+                          p 
+                            .span(style='color:#42c46a') Approves of leadership
+                        else
+                          p 
+                            .span(style='color:#db412d') Disapproves of leadership
+                else
+                  h5.centered No reviews from you yet
+        else
+          div.row
+            .col-md-8.col-md-offset-2
+              .white-bg-container
+                h3 #{user.name}
+                h5.centered Not college student
+              //- .white-bg-container
+              //-   p facebook buttons TODO
+              .white-bg-container
+                h3 Following
+                  //- show all TODO 
+                .container-fluid
+                  if clubs_following
+                    if clubs_following.length > 0
+                      each club in clubs_following
+                        .col-md-6
+                          div.img-container.suggested_club_logo
+                            - var club_link = "/" + club.university_url + "/" + club.glasshopper_url
+                            - var uni_link = "/" + club.university_url
+                            a(href="#{club_link}")
+                              - var image_source = club.logo_url || placeholder_logo
+                              img.cropped(src="#{image_source}")
+                          a(href="#{club_link}")
+                            h5.centered #{club.name}
+                          a(href="#{uni_link}")
+                            h6.centered #{club.college_name}
+                    else
+                      h4 You're not following any clubs yet
+                                               
+

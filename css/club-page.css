@@ -1,0 +1,234 @@
+
+.white-bg-container{
+    background-color: #fdfdfd;
+    margin-top:15px;
+    margin-bottom:15px;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+    padding:15px;
+    opacity:0.99;
+}
+
+table{
+  margin-left: auto;
+  margin-right: auto;
+ 
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+.white-bg-container h3{
+    margin-top:5px;
+}
+
+table > tr > td{
+  float:left;
+}
+
+
+th {
+    padding-left:0px;
+    padding-right:10px;
+}
+td {
+    text-align:left;
+}
+
+#ratings{
+  float:right;
+  line-height:100%;
+}
+
+#ratings th{
+    text-align: left;
+    font-weight: bold;
+}
+
+.white-bg-container > h2, p{
+    color: #000;
+}
+body {
+  margin: 0;
+}
+td, th {
+    color: #000;
+    font-size: 12px;
+}
+
+.flex-container-my { 
+    margin-top:20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.flex-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media(min-width:767px){
+    .flex-container-my{
+        margin-left: 30px; 
+    } 
+}
+section.content {
+  flex: 1;
+}
+
+
+
+p.pros, p.cons, p.rating{
+    text-align: left;
+    color: #454545;
+    line-height:120%;
+    font-weight:bold;
+    margin-bottom:0px;
+    margin-left: -15px;
+    margin-top:5px;
+}
+
+
+p.prosreview, p.consreview{
+    text-align:left;
+    color: #616161;
+    line-height:125%;
+    margin-left:-15px;
+}
+
+.white-bg-container > .media {
+    border-bottom: 1px solid #bbb;
+    padding:20px;
+}
+.white-bg-container > .media:last-child {
+    border-bottom: 0px solid #000;
+}
+div.img-container {
+     max-width:100%;
+    height:auto;
+     position: relative;
+     margin-left: auto;
+     margin-right: auto;
+     overflow: hidden;
+     margin-top:15px;
+     margin-bottom:10px;
+     background-color: #fff;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+
+img.cropped {
+    max-width:100%;
+    height:auto;
+}
+
+div.img-container.suggested_club_logo{
+  width:80px;
+  height: 80px;
+}
+
+
+div.img-container.club_logo{
+  width:200px;
+  height: 200px;
+}
+
+.container-fluid{
+    height: 100%;
+}
+body {
+  /*height: 100%;*/
+  /*margin: 0;*/
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    background-color: ##a1d7fc;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #a1d7fc), color-stop(100%, #a8e0b9));
+    background-image: -webkit-linear-gradient(top, #a1d7fc, #a8e0b9);
+    background-image: -moz-linear-gradient(top, #a1d7fc, #a8e0b9);
+    background-image: -ms-linear-gradient(top, #a1d7fc, #a8e0b9);
+    background-image: -o-linear-gradient(top, #a1d7fc, #a8e0b9);
+    background-image: linear-gradient(top, #a1d7fc, #a8e0b9);
+  }
+
+ 
+h1{
+    font-size: 50px;
+    margin-bottom: 60px;
+    margin-top:20px;
+}
+
+h3{
+    font-weight:bold;
+    color:#454545;
+}
+
+h5{
+    text-align:left;
+    color:#454545;
+    font-weight:bold;
+}
+
+h5.centered{
+  text-align:center;
+}
+
+h6.centered {
+  color:#454545;
+  margin-top:-5px;
+}
+#ratings_wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.average-rating{
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.follow_button{
+  border:none;
+}
+
+.following_button{
+  border:none;
+}
+
+
+.review_options_container{
+  float:right;
+  margin-top:-50px;
+}
+
+a.review_options{
+  color: #565656;
+  size:8px;
+  border:none;
+  background-color: #fff;
+  padding-left:5px;
+  padding-right:5px;
+}
+.options_container{
+  float:right;
+}
+.green{
+  color:green;
+}
+.green_yellow{
+  color:chartreuse;
+}
+.yellow{
+  color:yellow;
+}
+.yellow_red{
+  color:orange;
+}
+.red{
+  color:red;
+}

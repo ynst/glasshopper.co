@@ -1,0 +1,33 @@
+extends ../base.jade
+
+block content
+  style
+    include ../../css/search_container.css
+  style
+    include ../../css/search-bar.css
+  style
+    include /css/dropdown-suggestions.css
+  script(type='text/javascript' src='/scripts/typed.js')
+    // thanks! http://www.mattboldt.com/
+  script.
+    $(function(){
+      $(".element").typed({
+        strings: ["Welcome to Glasshopper! ^1000", "We launched at Yale! ^1000", "Review your clubs. ^1000", "Browse those at your university. ^2000", "Claim your organization’s page! ^1000"],
+        typeSpeed: 20,
+        loop: true
+      });
+    });
+  script(src='/scripts/search_box.js')
+  script(src='/scripts/typeahead.bundle.js')
+  script(src='/scripts/typeahead-search-box.js')
+  //- script
+  //-     document.getElementById("uni-search-box").onclick = function(){myFunction()};
+  //-     function myFunction() {
+  //-     document.getElementById("club-search-box").disabled ="false" ;
+  //-     }
+
+  #searchcontainer
+    .typed-element-container
+      h1
+        span.element
+    include  ./search_box_horizontal

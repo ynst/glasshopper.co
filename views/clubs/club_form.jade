@@ -1,0 +1,104 @@
+extends ../base.jade
+
+block extraScripts
+  script.
+    function validate_review() {
+      return true
+    }
+
+block content
+  //- style
+  //-   include /css/star-rating.css
+  style
+    include /css/Pretty-Registration-Form.css
+  style
+    include /css/club-page.css
+  //- style
+  //-   include /css/toggle-switch.css
+  //- style
+  //-   include /css/dropdown-suggestions.css
+
+  //- script(src='/scripts/star-rating.js')
+  //- script(src='/scripts/submit-review.js')
+  //- script(src='/scripts/typeahead.bundle.js')
+  //- script(src='/scripts/typeahead-search-box.js')
+  script(src='/scripts/search_box.js')
+  script(src='/scripts/member_entry.js')
+  //- form(name='addNoteForm', action='/review', method='POST')
+  //-   .form-group
+  //-     label(for='title') Title:
+  //-     input#title.form-control(type='text', name='title')
+  //-   .form-group
+  //-     label(for='description') Description:
+  //-     textarea#description.form-control(rows='5', name='description')
+  //-   button.btn.btn-default(type='submit') Submit
+
+  .row.register-form
+    .col-md-8.col-md-offset-2
+      -var postlink = "/claim?club=" + query_id
+      form.form-horizontal.custom-form(name="club-form" id="club-form" method="POST" , action=postlink, enctype="multipart/form-data")
+        h3 Tell us about #{club.name}
+        .form-group
+          .col-sm-4.label-column
+            label.control-label(for='club_type_id') Which of the following categories describes your club the best? 
+          .col-sm-6.input-column
+            select.selectpicker(data-style='btn-info', name='club_type_id' type="number" value="10")
+               each club_type in club_types
+                option(name='table2', value='#{club_type.ID}') #{club_type.name}
+        .form-group
+          .col-sm-4.label-column
+            label.control-label(for='description') Please write a short description of your club 
+          .col-sm-6.input-column
+            textarea#description.form-control(rows='4', cols='50', name='description'  placeholder="Description" value=(club) ? "#{club.description}": "")
+        .form-group
+          .col-sm-4.label-column
+            label.control-label(for='leadership_circulation') Leadership changes...
+          .col-sm-6.input-column
+            select.selectpicker(data-style='btn-info', name='leadership_circulation' type="number" value=(club) ? "#{club.leadership_circulation}": "0")
+               option(name='table2', value='0') every semester/trimester/quarter
+               option(name='table2', value='1') every year
+               option(name='table2', value='2') every 2 years
+        .form-group
+          .col-sm-4.label-column
+            label.control-label(for='member_range_id') How many members does your club have?
+          .col-sm-6.input-column
+            select.selectpicker(data-style='btn-info', name='member_range_id' type="number" value=(club) ? "#{club.member_range_id}": "0")
+               option(name='table2', value='10') 1-10
+               option(name='table2', value='25') 11-25
+               option(name='table2', value='50') 26-50
+               option(name='table2', value='51') 50+
+        .form-group
+          .col-sm-4.label-column
+            label.control-label(for='website') Website
+          .col-sm-6.input-column
+            input.form-control(type='text' name='website' id='website')
+        .form-group
+          .col-sm-4.label-column
+            label.control-label(for='manager_email') Contact email
+          .col-sm-6.input-column
+            input.form-control(type='email' name='manager_email' id='manager_email')
+        .form-group
+          .col-sm-4.label-column
+            label.control-label(for='social_media_ln_fb') Facebook page 
+          .col-sm-6.input-column
+            input.form-control(type='text' name='social_media_ln_fb' id='social_media_ln_fb')
+
+        .form-group
+          .col-sm-4.label-column
+            label.control-label(for='logo') Club logo
+          .col-sm-6.input-column
+            input(type='file', name='logo')
+        //- .form-group
+        //-   .col-sm-4.label-column
+        //-     label.control-label(for='emails') Please paste the .edu or .ac emails of your current and former members (You can change this information once every semester) 
+        //-     a(data-toggle="popover", data-trigger="hover click", data-content="We take the authenticity of reviews very seriously and use this information to make reviews from these emails appear as verified on Glasshopper" data-placement="bottom") Why do you collect members' emails?
+        //-   .col-sm-6.input-column
+        //-     textarea#emails.form-control(rows='4', cols='50' placeholder="Emails")
+        ul.list-unstyled
+          li
+            a#members(data-placement='bottom', data-toggle='popover', data-trigger="hover", data-content="Please enter your members' emails") 0 members
+        .checkbox
+          label
+            input(type='checkbox' name="is_recruiting")
+            | Are you recruiting new members?
+        button.btn.btn-default.submit-button(type='submit' form="club-form" onclick="return validate_review()") Claim #{club.name} now!

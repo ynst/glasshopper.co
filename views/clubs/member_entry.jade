@@ -1,0 +1,52 @@
+extends ../base.jade
+
+block extraScripts
+  //- script.
+  //-   $(document).ready(function(){
+  //-     var validate_review = function () { 
+  //-       return true;
+  //-     }
+  //-   });
+
+block content
+  //- style
+  //-   include /css/star-rating.css
+  style
+    include /css/Pretty-Registration-Form.css
+  style
+    include /css/club-page.css
+  //- style
+  //-   include /css/toggle-switch.css
+  //- style
+  //-   include /css/dropdown-suggestions.css
+  
+  //- script(src='/scripts/star-rating.js')
+  //- script(src='/scripts/submit-review.js')
+  //- script(src='/scripts/typeahead.bundle.js')
+  //- script(src='/scripts/typeahead-search-box.js')
+  script(src='/scripts/search_box.js')
+  script(src='/scripts/member_entry.js')
+  //- form(name='addNoteForm', action='/review', method='POST')
+  //-   .form-group
+  //-     label(for='title') Title:
+  //-     input#title.form-control(type='text', name='title')
+  //-   .form-group
+  //-     label(for='description') Description:
+  //-     textarea#description.form-control(rows='5', name='description')
+  //-   button.btn.btn-default(type='submit') Submit
+
+  .row.register-form
+    .col-md-8.col-md-offset-2
+      .formlike.form-horizontal.custom-form(name="club-form" id="club-form")
+        h1 Verify #{club.name}'s members in Fall 2016 or before
+        .form-group
+          .col-sm-4.label-column
+            label.control-label(for='emails') Please paste the .edu or .ac emails of your current and former members (You can change this information once every semester) 
+          .col-sm-6.input-column
+            textarea#emails.form-control(rows='4', cols='50' placeholder="Emails")
+        ul.list-unstyled
+          li
+            a#members(data-placement='bottom', data-toggle='popover', data-trigger="hover", data-content="Please enter your members' emails") 0 members
+        button#submit_emails.btn.btn-default.submit-button.loading Submit
+        div
+          a(data-toggle="popover", data-trigger="hover", data-content="We take the authenticity of reviews very seriously and use this information to verify reviews from these emails" data-placement="bottom") Why do you collect these emails?

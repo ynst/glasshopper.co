@@ -1,0 +1,41 @@
+extends ../base.jade
+
+block content
+  style
+    include /css/star-rating.css
+  style
+    include /css/Pretty-Registration-Form.css
+  style
+    include /css/club-page.css
+  //- style
+  //-   include /css/toggle-switch.css
+  style
+    include /css/dropdown-suggestions.css
+
+  script(src='/scripts/star-rating.js')
+  script(src='/scripts/submit-review.js')
+  script(src='/scripts/typeahead.bundle.js')
+  script(src='/scripts/typeahead-search-box.js')
+  script(src='/scripts/search_box.js')
+
+  #search_block_wrapper
+    include  ./search_box_horizontal
+  .col-sm-4.label-column
+      label.control-label(for='name-input-field') University 
+  if university
+    .col-sm-6.input-column
+      input#uni-input.form-control(type='search' placeholder="#{university}.name" readonly)
+  else
+    .col-sm-6.input-column
+      div#prefetch-universities
+        input#uni-input-typeahead.typeahead(type='search' placeholder="Universities")
+  .col-sm-4.label-column
+      label.control-label(for='name-input-field') Club 
+  if club && university 
+    .col-sm-6.input-column
+      input#club-input.form-control(type='search' placeholder="#{club}.name" readonly)
+  else
+    .col-sm-6.input-column
+      div#prefetch-clubs
+        input#club-input-typeahead.typeahead(type='search' placeholder="Clubs")
+        

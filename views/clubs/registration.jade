@@ -1,0 +1,102 @@
+extends ../base.jade
+
+block content
+  style
+    include /css/star-rating.css
+  style
+    include /css/Pretty-Registration-Form.css
+  style
+    include /css/club-page.css
+
+  style
+    include /css/toggle-switch.css
+
+
+  script(src='/scripts/star-rating.js')
+  script(src='/scripts/submit-review.js')
+
+  mixin star-rating(id, label)
+    .input-container
+      .col-md-2
+        if label
+          h3 #{label}
+      .col-md-2
+        .flex-container
+          .rating(id="#{id}" value="0")
+            span
+              input#str5(type='radio', name='rating', value='5')
+              label(for='str5')
+            span
+              input#str4(type='radio', name='rating', value='4')
+              label(for='str4')
+            span
+              input#str3(type='radio', name='rating', value='3')
+              label(for='str3')
+            span
+              input#str2(type='radio', name='rating', value='2')
+              label(for='str2')
+            span
+              input#str1(type='radio', name='rating', value='1')
+              label(for='str1')
+
+  mixin input_with_label(id, label, placeholder, isMultiline, isDisabled)
+    .input-container
+      if isMultiline
+        div(style="display:block;")
+          h3(style="float left;") #{label}
+          p(style="float: right;") Minimum 100 characters
+        div(style="display:block;")
+          input(id="#{id}", placeholder="#{placeholder}" disabled=isDisabled==1)
+      else
+        .col-md-2
+          h3 #{label}
+        .col-md-2
+          input(id="#{id}", placeholder="#{placeholder}" disabled=isDisabled==1)
+
+  .row.register-form
+      .col-md-8.col-md-offset-2
+        form.form-horizontal.custom-form
+          h1 Register Form
+          .form-group
+            .col-sm-4.label-column
+              label.control-label(for='name-input-field') Name 
+            .col-sm-6.input-column
+              input.form-control(type='text')
+          .form-group
+            .col-sm-4.label-column
+              label.control-label(for='email-input-field') Email 
+            .col-sm-6.input-column
+              input.form-control(type='email')
+          .form-group
+            .col-sm-4.label-column
+              label.control-label(for='pawssword-input-field') Password 
+            .col-sm-6.input-column
+              input.form-control(type='password')
+          .form-group
+            .col-sm-4.label-column
+              label.control-label(for='repeat-pawssword-input-field') Repeat Password 
+            .col-sm-6.input-column
+              input.form-control(type='password')
+          .form-group
+            .col-sm-4.label-column
+              label.control-label(for='dropdown-input-field') Dropdown 
+            .col-sm-4.input-column
+              .dropdown
+                button.btn.btn-default.dropdown-toggle(data-toggle='dropdown', aria-expanded='false', type='button')
+                  | Dropdown 
+                  span.caret
+                ul.dropdown-menu(role='menu')
+                  li(role='presentation')
+                    a(href='#') First Item
+                  li(role='presentation')
+                    a(href='#') Second Item
+                  li(role='presentation')
+                    a(href='#') Third Item
+          .checkbox
+            label
+              input(type='checkbox')
+              | I've read and accept the terms and conditions
+          button.btn.btn-default.submit-button(type='button') Submit Form
+
+
+  

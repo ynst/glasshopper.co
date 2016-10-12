@@ -1,0 +1,57 @@
+/*The MIT License (MIT)
+
+Copyright (c) 2014 Patric Gutersohn
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.*/
+
+.circliful .outer {
+    fill: transparent;
+    stroke: #a9feff;
+    stroke-width: 19.8;
+    stroke-dasharray: 534;
+    transition: stroke-dashoffset 1s;
+    -webkit-animation-play-state: running;
+    /* firefox bug fix - won't rotate at 90deg angles */
+    -moz-transform: rotate(-89deg) translateX(-190px);
+}
+
+/* full circle 25 empty 534 */
+.circliful .inner {
+    fill: transparent;
+    stroke: orange;
+    stroke-width: 20;
+    stroke-dasharray: 534;
+    transition: stroke-dashoffset 1s;
+    -webkit-animation-play-state: running;
+    /* firefox bug fix - won't rotate at 90deg angles */
+    -moz-transform: rotate(-89deg) translateX(-190px);
+    stroke-dashoffset: 0;
+    fontColor: #a9feff;
+}
+
+.circliful {
+    overflow: visible !important;
+}
+
+average-rating.circliful{
+    fontColor: #a9feff;
+    targetPercent:1;
+}
+
+.svg-container {
+    width: 100%;
+    margin: 0 auto;
+    overflow: visible;
+}
+
+svg .icon {
+    font-family: FontAwesome;
+}

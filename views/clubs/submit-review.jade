@@ -1,0 +1,85 @@
+extends ../base.jade
+
+block content
+  style
+    include /css/star-rating.css
+  style
+    include /css/submit-review.css
+  style
+    include /css/club-page.css
+
+  style
+    include /css/toggle-switch.css
+
+
+  script(src='/scripts/star-rating.js')
+  script(src='/scripts/submit-review.js')
+
+  mixin star-rating(id, label)
+    .input-container
+      .col-md-2
+        if label
+          h3 #{label}
+      .col-md-2
+        .flex-container
+          .rating(id="#{id}" value="0")
+            span
+              input#str5(type='radio', name='rating', value='5')
+              label(for='str5')
+            span
+              input#str4(type='radio', name='rating', value='4')
+              label(for='str4')
+            span
+              input#str3(type='radio', name='rating', value='3')
+              label(for='str3')
+            span
+              input#str2(type='radio', name='rating', value='2')
+              label(for='str2')
+            span
+              input#str1(type='radio', name='rating', value='1')
+              label(for='str1')
+
+  mixin input_with_label(id, label, placeholder, isMultiline, isDisabled)
+    .input-container
+      if isMultiline
+        div(style="display:block;")
+          h3(style="float left;") #{label}
+          p(style="float: right;") Minimum 100 characters
+        div(style="display:block;")
+          input(id="#{id}", placeholder="#{placeholder}" disabled=isDisabled==1)
+      else
+        .col-md-2
+          h3 #{label}
+        .col-md-2
+          input(id="#{id}", placeholder="#{placeholder}" disabled=isDisabled==1)
+
+  div.row.review-wrapper
+    .col-md-9
+      .container.white-bg-container
+        h2.header Review your organization
+        if university
+          +input_with_label("university", "","#{university.name}", 0, 1)
+        else
+          +input_with_label("university", "", "Search Your University", 0, 0)
+
+        if club
+          +input_with_label("club", "","#{club.name}", 0, 1)
+        else
+          +input_with_label("club", "", "Search Your Club", 0, 0)
+        .row.toggle-demo
+          label.switch-light.switch-candy
+            input(type='checkbox')
+            strong.large-4.columns
+              | Wireless
+            span.large-4.columns.float-left
+              span Former Member
+              span Current Member
+              a
+        +star-rating("ranking_overall", "Overall Ranking")
+        +input_with_label("pros", "", "Pros", 1)
+    .col-md-3
+      .container.white-bg-container
+        p some explanatory stuff
+
+
+  

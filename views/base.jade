@@ -1,0 +1,82 @@
+doctype html
+html(lang="en")
+  head
+    title Glasshopper
+    meta(charset='utf-8')
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/bootstrap.min.css")
+    link(rel="stylesheet", href="/css/arimo.css")
+    script(src='/scripts/jquery.min.js')
+    //-script(src='/scripts/all.js')
+    script(src='/scripts/bootstrap.min.js')
+    script(src='https://use.fontawesome.com/574f618a66.js')
+
+    style
+      include ../css/styles.css 
+    style
+      include ../css/my-footer.css 
+    style
+      include ../css/my-navbar.css 
+    block extraScripts
+
+  body
+    nav.navbar.navbar-default
+      .container-fluid
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='/') 
+            img.logo(src='/images/LOGO final white.png', width='100')
+        #myNavbar.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            if user && user.demographic_type !=0
+              li
+                a.submit-review(href="/browse") Browse clubs
+            li
+              a(href='/what-is-glasshopper') What is Glasshopper?
+          //- if the user is signed in
+          if user && user.demographic_type != 0 
+            ul.nav.navbar-nav.navbar-right
+              li
+                a.submit-review(href='/review') Submit a review
+              li
+                a(href="/profile") #{user.name}
+              li
+                a(href='/logout') Log out
+          else if user && user.demographic_type == 0
+            ul.nav.navbar-nav.navbar-right
+              li
+                a.submit-review(href="/browse") Browse clubs
+              li
+                a(href="/profile") #{user.name}
+              li
+                a(href='/logout') Log out
+          else
+            ul.nav.navbar-nav.navbar-right
+              li
+                a(href='/login')
+                  |  Login
+              li
+                a(href="/signup")
+                  |  Sign up
+              li
+                a.submit-review(href="/browse") Browse clubs
+
+    block content
+    #footer
+      footer.my-footer
+        .container
+          .row
+            .col-sm-6.logo
+              a(href='/')
+                img(src='/images/LOGO final white.png', width='100')
+              h5 Built with ♥ by students at Yale.
+            .col-sm-6
+              a(href='https://www.facebook.com/glasshopper.co', target='_blank')
+                i(class="fa fa-facebook-square" aria-hidden="true")
+              a(class="icon twitter" href='https://twitter.com/getglasshopper', target='_blank')
+              h5 For comments, bug reports and suggestions, please email 
+                a(href="mailto:team@glasshopper.co") team@glasshopper.co
+

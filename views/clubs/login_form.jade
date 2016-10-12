@@ -1,0 +1,106 @@
+extends ../base.jade
+
+block extraScripts
+  //- script.
+  //-   $(document).ready(function(){
+  //-     var validate_review = function () { 
+  //-       return true;
+  //-     }
+  //-   });
+
+block content
+  //- style
+  //-   include /css/star-rating.css
+  style
+    include /css/Pretty-Registration-Form.css
+  style
+    include /css/club-page.css
+  //- style
+  //-   include /css/toggle-switch.css
+  //- style
+  //-   include /css/dropdown-suggestions.css
+
+  //- script(src='/scripts/star-rating.js')
+  //- script(src='/scripts/submit-review.js')
+  //- script(src='/scripts/typeahead.bundle.js')
+  //- script(src='/scripts/typeahead-search-box.js')
+  //- script(src='/scripts/search_box.js')
+  script(src='/scripts/login_form.js')
+  //- form(name='addNoteForm', action='/review', method='POST')
+  //-   .form-group
+  //-     label(for='title') Title:
+  //-     input#title.form-control(type='text', name='title')
+  //-   .form-group
+  //-     label(for='description') Description:
+  //-     textarea#description.form-control(rows='5', name='description')
+  //-   button.btn.btn-default(type='submit') Submit
+
+  .row.register-form
+    .col-md-8.col-md-offset-2
+      form.form-horizontal.custom-form(id="login-form" name="login-form" method="POST" , action="/login")
+        h1 Login
+        //- .form-group
+        //-   .col-sm-4.label-column
+        //-     label.control-label(for='real_name') Name 
+        //-   .col-sm-6.input-column
+        //-     input.form-control(type='text' name="real_name")
+        //- .form-group
+        //-   .col-sm-4.label-column
+        //-     label.control-label Are you a university student?
+        //-   .col-sm-4
+        //-     .radio
+        //-       label
+        //-         input.is_university_student(type='radio', name='is_university_student' value="1" id="university_student" checked="checked")
+        //-         | Yes
+        //-     .radio
+        //-       label
+        //-         input.is_university_student(type='radio', name='is_university_student' value="0" id="no_university_student")
+        //-         | No
+        .form-group#email_input_group
+          .col-sm-4.label-column
+            label.control-label(for='email' id="email_input_label") Email
+          .col-sm-6.input-column
+            input.form-control(type='email' name="email" id="email" required)
+        .form-group
+          .col-sm-4.label-column
+            label.control-label(for='password') Password 
+          .col-sm-6.input-column
+            input.form-control(type='password' name="password" id="password" required)
+        //- .form-group#repeat_pw
+        //-   .col-sm-4.label-column
+        //-     label.control-label(for='repeat-password') Repeat Password 
+        //-   .col-sm-6.input-column
+        //-     input.form-control(type='password' name="repeat-password" id="repeat-password" required)
+        //- .form-group#year_university
+        //-   .col-sm-4.label-column
+        //-     label.control-label(for='dropdown-input-field') Which year are you? 
+        //-   .col-sm-4.input-column
+        //-     .dropdown
+        //-       button.btn.btn-default.dropdown-toggle(data-toggle='dropdown', aria-expanded='false', type='button')
+        //-         | Dropdown 
+        //-         span.caret
+        //-       ul.dropdown-menu(role='menu')
+        //-         li(role='presentation')
+        //-           a(href='#') First Item
+        //-         li(role='presentation')
+        //-           a(href='#') Second Item
+        //-         li(role='presentation')
+        //-           a(href='#') Third Item
+        //- .form-group#which_year.which_year
+        //-   .col-sm-4.label-column
+        //-     label.control-label(for='year') Which year are you? 
+        //-   .col-sm-4.input-column
+        //-     select.selectpicker(data-style='btn-info', name='year' type="number" value='1')
+        //-        option(name='table2', value='1') Freshman
+        //-        option(name='table3', value='2') Sophomore
+        //-        option(name='table4', value='3') Junior
+        //-        option(name='table5', value='4') Senior
+        //-        option(name='table5', value='5') Other (Prefrosh, super senior etc. )
+        //- .checkbox
+        //-   label
+        //-     input(type='checkbox' name="read_tc" required)
+        //-     | I've read and accept the terms and conditions
+        p.flash-message #{message}
+        button.btn.btn-default.submit-button(type='submit' form="login-form") Log in
+        br
+        a(href="/signup") Not signed up yet? Go to the sign up page

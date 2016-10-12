@@ -1,0 +1,249 @@
+*{
+  margin: 0px;
+  padding: 0px;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #fff;
+}
+
+.navbar-default .navbar-nav>li>a.submit-review{
+  margin-top:10px;
+  margin-bottom:10px;
+  margin-left:20px;
+  margin-right:20px;
+  background-color: #ff2e5f;
+  border-radius: 5px;
+  height:20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight:bold;
+}
+
+@media (max-width:767px) {
+  body {
+    position: relative;
+    z-index: 1;
+    height: 60%;
+    text-align: center;
+    background-color: #a1d7fc;
+  }
+}
+
+@media (min-width:767px) {
+  body {
+    position: relative;
+    z-index: 1;
+    height: 60%;
+    text-align: center;
+    
+    -webkit-background-size: cover; /* For WebKit*/
+    -moz-background-size: cover;    /* Mozilla*/
+    -o-background-size: cover;      /* Opera*/
+    background-size: cover;         /* Generic*/
+  }
+}
+
+
+/* navigation bar */
+
+.navbar{
+  background-color:#9dd7fc;
+ }
+
+ .navbar a{
+  color: #fff;
+ }
+
+
+.navbar-default .navbar-nav .navbar a:hover {
+  color:#fff;
+  text-decoration: underline;
+  text-decoration-color:#fff;
+}
+
+
+.navbar-brand .glyphicon{
+  margin-right:6px;
+}
+
+
+
+/* unknown or unused stuff */
+
+@media (min-width:767px) {
+  .hero .get-it{
+    text-align:right;
+    margin-top:0px;
+    padding-right:30px;
+  }
+}
+
+@media (max-width:767px) {
+  .hero .get-it{
+    text-align:center;
+  }
+}
+
+@media (max-width:767px) {
+  .hero .get-it p{
+    color:#454545;
+    font-size:12pt;
+  }
+}
+
+@media (min-width:767px) {
+  .hero .get-it p{
+    color:#454545;
+    margin-bottom:40px;
+    margin-left:120px;
+    font-size:12pt;
+  }
+}
+
+.hero .get-it .btn{
+  margin-left:10px;
+  margin-bottom:10px;
+  text-shadow:none;
+}
+
+.icon-feature{
+  text-align:center;
+}
+
+.icon-feature .glyphicon{
+  font-size:60px;
+}
+
+section.features{
+  background-color:#369;
+  padding:40px 0;
+  color:#fff;
+}
+
+.features h2{
+  color:#fff;
+}
+
+.features .icon-features{
+  margin-top:15px;
+}
+
+.testimonials blockquote{
+  text-align:center;
+}
+
+
+/* ----- Custom Theme ----- */
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Arimo', sans-serif !important;
+  background-color: #fff;
+}
+
+h2 {
+  font-weight: 400;
+  margin-top: 0;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+header h1 {
+  color: #66d9f7;
+}
+
+/* the typed element very coooliooo */
+.element{
+  color:#fff;
+  text-shadow: 0 0 2px rgba(0,0,0,.5);
+}
+.typed-cursor{
+  color:#fff;
+  text-shadow: 0 0 2px rgba(0,0,0,0.5);
+}
+
+/* some cool button styles */
+
+.gh_button_pink_bg{
+  margin:10px;
+  color:#fff !important; 
+  background-color: #ff2e5f !important;
+  border-radius: 5px;
+  padding:5px;
+  padding-right: 15px;
+  padding-left: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight:bold;
+}
+
+.gh_button{
+  margin:10px;
+  color:#fff !important; 
+  background-color: #ff2e5f;
+  border-radius: 5px;
+  padding:5px;
+  padding-right: 15px;
+  padding-left: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight:bold;
+}
+
+.follow_button{
+  color:#fff; 
+  background-color:#ff2e5f; 
+}
+
+.following_button{
+  color:#fff; 
+  background-color:#00cc00; 
+}
+
+.loading{
+  data-loading-text: '<i class='fa fa-circle-o-notch fa-spin'></i> Loading';
+}
+/*Icons*/
+/*
+.icon {
+width:25px;
+height:25px;
+display:block;
+text-indent:-9999px;
+background-image:url(http://tridentdesign.com/wp-content/uploads/2012/12/gemicon.jpg);
+background-repeat:no-repeat;
+}
+
+.facebook {
+background-position:-136px -113px;
+}
+.twitter {
+background-position:-181px -112px;
+}*/
+.suggested-clubs:hover {
+  -webkit-transition: all 200ms ease;
+-moz-transition: all 200ms ease;
+-ms-transition: all 200ms ease;
+-o-transition: all 200ms ease;
+transition: all 200ms ease;
+  margin-top:15px;
+  margin-bottom:15px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.7); 
+}
+
+.my_flex_container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

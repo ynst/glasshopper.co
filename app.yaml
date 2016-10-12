@@ -1,0 +1,11 @@
+runtime: nodejs
+vm: true
+
+# Temporary setting to keep gcloud from uploading node_modules
+skip_files:
+ - ^node_modules$
+
+env_variables:
+  SENDGRID_API_KEY: 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
+  SENDGRID_SENDER: team@glasshopper.co
+  SIGNUP_TEMPLATE_ID: 2ca5e184-04d2-4bca-8111-c58becd69dd2

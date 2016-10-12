@@ -1,0 +1,384 @@
+extends ../base.jade
+
+block content
+  style
+    include ../../css/club-page.css
+  style
+    include ../../css/star-rating.css
+  style
+    include ../../css/jquery.circliful.css
+
+  script(src='/scripts/club-page.js')
+  script(src='/scripts/star-rating.js')
+  script(src='/scripts/jquery.circliful.min.js')
+
+  script(type='text/javascript').
+    var recommend_perc = #{club.avg_recommend} *  100
+    var approval_perc = #{club.avg_approval} *  100
+
+
+  mixin review_header(year, college_name)
+    case year
+      when 1
+        h5 A freshman from #{college_name} says
+      when 2
+        h5 A sophomore from #{college_name} says
+      when 3
+        H5 A junior from #{college_name} says
+      when 4
+        H5 A senior from #{college_name} says
+      default
+        H5 A student from #{college_name} says
+
+  mixin review_header_non_anon(year, name)
+    case year
+      when 1
+        h5 #{name} (freshman) says
+      when 2
+        h5 #{name} (sophomore) says
+      when 3
+        H5 #{name} (junior) says
+      when 4
+        H5 #{name} (senior) says
+      default
+        H5 #{name}  says
+        
+  mixin letter_grade(num_grade)
+    case num_grade
+      when < 20
+        H1.red.centered F
+      when < 40
+        H1.yellow_red.centered D
+      when < 60
+        H1.yellow.centered C
+      when < 80
+        H1.green_yellow.centered B
+      default
+        H1.green.centered A
+  #fb-root
+  script.
+    (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.7";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+
+  - var placeholder_logo = "/images/club_placeholder.png"
+  - var num_removed_reviews = 0
+  .flex-container-my
+    .content
+      .container-fluid
+        div.row
+          .col-md-4
+            .white-bg-container
+              a(href="#")
+                div.img-container.club_logo
+                  - var image_source = club.logo_url || placeholder_logo
+                  img.cropped(src="#{image_source}")
+                h3 #{club.name}
+                p #{club.college_name}
+              //- add facebook links
+              if user
+                .flex-container
+                  if !following 
+                    button.gh_button(id="#{club.ID}" class="follow_button") Follow on Glasshopper
+                  else
+                    button.gh_button(id="#{club.ID}" class="following_button") Following
+            .white-bg-container.my_flex_container
+              +letter_grade(club.num_grade)
+            if !club.is_claimed_by_userid
+              if user && user.demographic_type !=0
+                .white-bg-container
+                  h3 This club is not claimed yet. 
+                  -var claim_link ="/claim?club="+ hashed_club_id
+                  a(href=claim_link) Click here to claim it now!
+              if !user
+                .white-bg-container
+                  h3 This club is not claimed yet
+                  a(href='/signup') Sign up to claim it now!
+            if club.is_claimed == 1
+              if club.description
+                .white-bg-container
+                  p #{club.description}
+              .white-bg-container
+                table
+                  tr 
+                    th Category
+                    td #{club.type}
+                  tr 
+                    th Number of members
+                    td 1-10
+                    //- #{club.type_id}
+                  //- tr 
+                  //-   th President
+                  //-   td #{club.manager_1_name}
+                  tr 
+                    th Website
+                    td #{club.website}
+                  tr
+                    th Contact email
+                    td #{club.manager_email}
+                  tr 
+                    th President
+                    td #{club.manager_1_name}
+                  tr 
+                    th Treasurer
+                    td #{club.manager_2_name}
+                    //- #{club.type_id}
+              if club.social_media_ln_fb
+                  .fb-page(data-href='#{club.social_media_ln_fb}', data-tabs='timeline', data-small-header='false', data-adapt-container-width='true', data-hide-cover='false', data-show-facepile='true')
+                    blockquote.fb-xfbml-parse-ignore(cite='#{club.social_media_ln_fb}')
+                      a(href='#{club.social_media_ln_fb}')
+            else
+              .white-bg-container
+                table
+                  tr 
+                    th Category
+                    td #{club.type}
+                  tr 
+                    th Website
+                    td #{club.website}
+                  tr 
+                    th President
+                    td #{club.manager_1_name}
+                  tr 
+                    th Treasurer
+                    td #{club.manager_2_name}
+          .col-md-8
+            .col-md-6
+              .white-bg-container    
+                //- check this link to find other features of this pie chart 
+                //-https://github.com/pguso/jquery-plugin-circliful
+                h3 #{club.name}'s Overall Performance
+                .row
+                  .col-md-6
+                    #recommend.average-rating
+                  .col-md-6
+                    #approve.average-rating
+                script.
+                  if (#{club.num_reviews} == 0){
+                    $("#recommend").circliful({
+                      animationStep: 5,
+                      foregroundBorderWidth: 8,
+                      backgroundBorderWidth: 15,
+                      text: "Would recommend",
+                      textBelow: true,
+                      foregroundColor: "#ff2e5f",
+                      fillColor: "#fff",
+                      targetPercent: 125,
+                      targetColor: "#ddd",
+                      backgroundColor: "fff",
+                      fontColor: "#ff2e5f",
+                      percentageTextSize: 32,
+                      replacePercentageByText: 'n/a'
+                    })
+                    $("#approve").circliful({
+                        animationStep: 5,
+                        foregroundBorderWidth: 8,
+                        backgroundBorderWidth: 15,
+                        text: "Approve of leadership",
+                        textBelow: true,
+                        foregroundColor: "#87cbc4",
+                        fillColor: "#fff",
+                        targetPercent: 125,
+                        targetColor: "#ddd",
+                        backgroundColor: "fff",
+                        fontColor: "#87cbc4",
+                        percentageTextSize: 32,
+                        replacePercentageByText: 'n/a'
+                    })
+                  }
+                  else{
+                    $("#recommend").circliful({
+                      animationStep: 5,
+                      foregroundBorderWidth: 8,
+                      backgroundBorderWidth: 15,
+                      percent: recommend_perc,
+                      text: "Would recommend",
+                      textBelow: true,
+                      foregroundColor: "#ff2e5f",
+                      fillColor: "#fff",
+                      targetPercent: 125,
+                      targetColor: "#ddd",
+                      backgroundColor: "fff",
+                      fontColor: "#ff2e5f",
+                      percentageTextSize: 32
+                    })
+
+                    $("#approve").circliful({
+                        animationStep: 5,
+                        foregroundBorderWidth: 8,
+                        backgroundBorderWidth: 15,
+                        percent: approval_perc,
+                        text: "Approve of leadership",
+                        textBelow: true,
+                        foregroundColor: "#87cbc4",
+                        fillColor: "#fff",
+                        targetPercent: 125,
+                        targetColor: "#ddd",
+                        backgroundColor: "fff",
+                        fontColor: "#87cbc4",
+                        percentageTextSize: 32
+                    })
+                  }
+            .col-md-6
+              if suggested_clubs 
+                .white-bg-container.suggested-clubs
+                  //-suggested clubs   
+                  h3 Other clubs at #{club.college_name}
+                  - var n = 2 //- number of similar pages displayed
+                  if suggested_clubs.length > 1
+                    .row
+                      each suggested_club in suggested_clubs
+                        if suggested_club.name != club.name && n > 0
+                          - var club_link = "/" +club.university_url + "/" + suggested_club.glasshopper_url
+                          - var uni_link = "/" + club.university_url
+                          - n = n -1
+                          .col-md-6
+                            div.img-container.suggested_club_logo
+                              a(href="#{club_link}")
+                                - var image_source = suggested_club.logo_url || placeholder_logo
+                                img.cropped(src="#{image_source}")
+                            a(href="#{club_link}")
+                              h5.centered #{suggested_club.name}
+                            a(href="#{uni_link}")
+                              h6.centered #{club.college_name}
+                  else 
+                    h4 Sorry, we don't have any clubs to suggest yet. Please follow clubs to get more suggestions
+          .col-md-8
+            if review_by_user
+              .white-bg-container
+                .media
+                  //- div.options_container
+                  //-   button.btn.btn-primary(id="#{review_by_user.ID}" class="review_options") Edit
+                  //-   button.btn.btn-danger(id="#{review_by_user.ID}" class="review_options") Delete
+
+                  if review_by_user.is_removed == 1
+                    - num_removed_reviews++
+                    h5.centered Sorry, your review about this club has been collapsed.
+                    a(href="/frequently-asked-questions") Why?
+                  else
+                    h5 Here is your review about this club
+                    //- +review_by_user_header(review_by_user.reviewer_year_num, club.college_name) 
+                    //-+review_by_userer(num_semesters, semester_type)
+                    .col-md-6
+                      p.pros Pros: 
+                      p.prosreview #{review_by_user.pros}
+                      p.cons Cons: 
+                      p.consreview #{review_by_user.cons}
+
+
+                    .col-md-6
+                      #ratings_wrapper
+                        table
+                          tbody
+                            tr 
+                              th Hours per week
+                              td #{review_by_user.rating_hours_per_week}
+                            tr
+                                  th Day-to-day
+                                  td 
+                                    input.rating(type='number', id="rating_day_to_day" data-size='xs', name='rating_day_to_day' showClear="false" value="#{review_by_user.rating_day_to_day}" readonly)
+                            tr
+                                  th Future value
+                                  td 
+                                    input.rating(type='number', id="rating_future_value" data-size='xs', name='rating_future_value' showClear="false" value="#{review_by_user.rating_future_value}" readonly)
+                            tr
+                                  th Legitimacy
+                                  td 
+                                    input.rating(type='number', id="rating_legitimacy" data-size='xs', name='rating_legitimacy' showClear="false" value="#{review_by_user.rating_legitimacy}" readonly)
+                            tr
+                                  th People
+                                  td 
+                                    input.rating(type='number', id="rating_people" data-size='xs', name='rating_people' showClear="false" value="#{review_by_user.rating_people}" readonly)
+                            
+                      if review_by_user.rating_recommend
+                        p 
+                          .span(style='color:#42c46a') Overall recommends
+                      else
+                        p 
+                        .span(style='color:#db412d') Overall does not recommend
+                              
+                      if (review_by_user.rating_leadership)
+                        p 
+                          .span(style='color:#42c46a') Approves of leadership
+                      else
+                        p 
+                          .span(style='color:#db412d') Disapproves of leadership
+                                                             
+
+
+            .white-bg-container
+              if reviews && reviews.length >0
+                each review in reviews
+                  if review.is_removed == 1
+                    - num_removed_reviews++
+                  else
+                    .media
+                      div.options_container
+                        button.btn.btn-warning(id="#{review.ID}" class="review_options") Report
+                      if review.is_anon == 0
+                        +review_header_non_anon(review.reviewer_year_num, review.created_by) 
+                      else
+                        +review_header(review.reviewer_year_num, club.college_name) 
+                      //-+reviewer(num_semesters, semester_type)
+                      .col-md-6
+                        p.pros Pros: 
+                        p.prosreview #{review.pros}
+                        p.cons Cons: 
+                        p.consreview #{review.cons}
+
+
+                      .col-md-6
+                        #ratings_wrapper
+                          table
+                            tbody
+                              tr 
+                                th Hours per week
+                                td #{review.rating_hours_per_week}
+                              tr
+                                    th Culture
+                                    td 
+                                      input.rating(type='number', id="rating_day_to_day" data-size='xs', name='rating_day_to_day' showClear="false" value="#{review.rating_day_to_day}" readonly)
+
+                              tr
+                                    th Opportunities for Advancement
+                                    td 
+                                      input.rating(type='number', id="rating_future_value" data-size='xs', name='rating_future_value' showClear="false" value="#{review.rating_future_value}" readonly)
+                              tr
+                              tr
+                                    th Skill Development
+                                    td 
+                                      input.rating(type='number', id="rating_legitimacy" data-size='xs', name='rating_legitimacy' showClear="false" value="#{review.rating_legitimacy}" readonly)
+                              tr
+                                    th Quality of People
+                                    td 
+                                      input.rating(type='number', id="rating_people" data-size='xs', name='rating_people' showClear="false" value="#{review.rating_people}" readonly)
+                              
+                        if review.rating_recommend
+                          p 
+                            .span(style='color:#42c46a') Overall recommends
+                        else
+                          p 
+                          .span(style='color:#db412d') Overall does not recommend
+                                
+                        if (review.rating_leadership)
+                          p 
+                            .span(style='color:#42c46a') Approves of leadership
+                        else
+                          p 
+                            .span(style='color:#db412d') Disapproves of leadership
+              else 
+                h5.centered No reviews about this club yet     
+                                     
+              if num_removed_reviews > 1
+                .media
+                  h5.centered #{num_removed_reviews} reviews have been collapsed
+                  a(data-toggle="popover", data-trigger="hover click", data-content="When a review gets reported, we collapse it until a Glasshopper staff verifies that the review is acceptable" data-placement="bottom") Why?
+              else if num_removed_reviews == 1
+                .media
+                  h5.centered 1 review has been collapsed
+                  a(data-toggle="popover", data-trigger="hover click", data-content="When a review gets reported, we collapse it until a Glasshopper staff verifies that the review is acceptable" data-placement="bottom") Why?

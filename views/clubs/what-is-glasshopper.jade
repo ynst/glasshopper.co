@@ -1,0 +1,82 @@
+extends ../base.jade
+
+
+.flex-container-my
+    .content
+      .container-fluid
+        block content
+
+          link(rel="stylesheet", href='https://fonts.googleapis.com/css?family=Arimo:400,700')
+          
+          link(rel='stylesheet', href='/css/Large button style.css')
+          link(rel='stylesheet', href='/css/what-is-glasshopper.css')
+
+          script(src='/scripts/what-is-glasshopper.js')
+
+          div.stripe.top.full-height
+            .transparent.flex-container
+              .container
+                  h1.top(style="font-weight:bold;") Time flies. Let us be your co-pilot.
+                  h3.top
+                    | Glasshopper guides you through the jungle of college extracurriculars. Read hundreds of trusted reviews on university clubs by students, for students.
+                  //- .col-md-4
+                  //-   img(src='/images/mascot in circle.png', width='150', style="float:right; padding-top:20px;")
+                div
+                  if user
+                    a#club_nav_button_main_page.gh_button_pink_bg(href="/browse")  Browse clubs
+                  else
+                    a#club_nav_button_main_page.gh_button_pink_bg(href="/signup")  Sign Up Now
+                  
+          div.stripe(style="background-color:#fff; color:#454545;")
+            .container
+              .flex-container
+                .single-header-wrapper
+                  h1(style="font-weight:bold; color: #ff2e5f;")
+                   | Good times begin with smart decisions.
+              
+                  h4(style="color:#454545")
+                    | Whether you’re already part of a student club, sports team, Greek organization or whether you're looking to join one, we want you to love every single minute you spend in activities outside of class. That’s why we’ve created a platform to help you collect all
+                    | the insights you need to find your niche. Because we believe that knowledge makes time more valuable.
+                
+            
+          div.stripe.gradient
+              .row
+                .col-md-4
+                  .single-header-wrapper
+                    h2(style="color:#fff;") #NoMoreRegrets 
+                    h5
+                      | College is short and sweet, but mistakes are bitter and take a long time to repair. With Glasshopper's verified reviews, insights, and recommendations, you'll skip all the trial and error and be as wise as a college graduate.
+                .col-md-4
+                  .single-header-wrapper
+                    h2(style="color: #fff;") Improve the system by hacking it. 
+                    h5
+                      | Right now, great clubs have a tough time standing out, while mediocre ones don't have any incentive to improve. Your precious feedback will change that and help student organizations step up their game. 
+                .col-md-4
+                  .single-header-wrapper
+                    h2(style="color: #fff;") Fly in the right direction. 
+                    h5
+                      | Smart extracurricular choices let you test out careers before you commit to a year-round work life. With our data, you'll soon be able to understand which extracurriculars prepare you best for your post-graduation life!
+
+
+          div.stripe(style="background-color:white; padding-top:30px")
+            .container
+              div(style="")
+                h1.text-center(style="font-weight:bold; color:#454545;")
+                  | How college students spend their waking hours
+              div.img-container
+                img.pie_chart.cropped(src='/images/PIE CHART_transparent_web.png', width='600')
+          .div.stripe.top
+            .transparent
+              .flex-container
+                h2(style="font-weight:bold; color:#454545; padding-top:25px;")
+                      | Make that 25% count. Sign up now to start reviewing!
+                img(src='/images/mascot in circle.png', width='150')
+              div
+                  if user
+                      a#club_nav_button_main_page.gh_button_pink_bg(href="/browse")  Browse clubs
+                    else
+                      a#club_nav_button_main_page.gh_button_pink_bg(href="/signup")  Sign Up Now
+
+
+
+
